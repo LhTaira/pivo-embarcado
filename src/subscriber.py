@@ -32,7 +32,6 @@ def mainOffroad():
   while cap.isOpened():
     success, frame = cap.read()
     if success and keep_running_video:
-      print(keep_running_video)
       width = int(frame.shape[1] * scale_ratio)
       height = int(frame.shape[0] * scale_ratio)
       #x,y,h,w = 50, 350, height-600, (width-150)
@@ -56,13 +55,13 @@ def mainOffroad():
       lane_obj.get_lane_line_previous_window(left_fit, right_fit, plot=False)
       frame_with_lane_lines = lane_obj.overlay_lane_lines(plot=False)
       lane_obj.calculate_curvature(print_to_terminal=False)
-      lane_obj.calculate_car_position(print_to_terminal=False)
+      cop_position = lane_obj.calculate_car_position(print_to_terminal=False)
       frame_with_lane_lines2 = lane_obj.display_curvature_offset(
         frame=frame_with_lane_lines, plot=False)
       result.write(frame_with_lane_lines2)
 
-      #cv2.imshow('Frame', frame_with_lane_lines) 
-      print('sok')
+      cv2.imshow('Frame', frame_with_lane_lines) 
+      send_directions(cop_position)
 
       if (cv2.waitKey(25) & 0xFF == ord('q')) or not keep_running_video: 
         print('fok1')
@@ -75,10 +74,14 @@ def mainOffroad():
   cap.release()
   result.release()
 
+def send_directions(cop_position):
+  if cop_position > 1:
+    print('<---')
+  elif cop_position < -1:
+    print('--->')
 
 def on_message(client, userdata, msg):
   global keep_running_video
-  #global vision_thread
   message = msg.payload.decode()
   vision_thread = threading.Thread(target=mainOffroad)
   print(f"Received `{message}` from `{msg.topic}` topic")
