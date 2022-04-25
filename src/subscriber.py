@@ -60,7 +60,7 @@ def mainOffroad():
         frame=frame_with_lane_lines, plot=False)
       result.write(frame_with_lane_lines2)
 
-      cv2.imshow('Frame', frame_with_lane_lines) 
+      #cv2.imshow('Frame', frame_with_lane_lines) 
       send_directions(cop_position)
 
       if (cv2.waitKey(25) & 0xFF == ord('q')) or not keep_running_video: 
