@@ -75,10 +75,15 @@ def mainOffroad():
   result.release()
 
 def send_directions(cop_position):
-  if cop_position > 1:
-    print('<---')
-  elif cop_position < -1:
-    print('--->')
+  message = ''
+  if cop_position > 5:
+    message = 'L1'
+  elif cop_position < -5:
+    message = 'R1'
+  else:
+    message = 'L0'
+  print(message)
+  mqtt_client.publish(publishTopic, message)
 
 def on_message(client, userdata, msg):
   global keep_running_video
@@ -104,7 +109,8 @@ output_frames_per_second = 60.0
 
 broker = 'broker.emqx.io'
 port = 1883
-topic = '/python/fokson'
+topic = 'modeTopic'
+publishTopic = 'pathQuery'
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 username = 'emqx'
 password = 'public'
