@@ -2,7 +2,7 @@
 
 Este repositório contém o serviço de visão computacional do pivô PIPE.
 
-* algorítmo baseado no artigo disponível em:
+* Algoritmo de visão computacional baseado no artigo disponível em:
 
 ```https://automaticaddison.com/the-ultimate-guide-to-real-time-lane-detection-using-opencv/```
 
