@@ -2,6 +2,10 @@
 
 Este repositório contém o serviço de visão computacional do pivô PIPE.
 
+* algorítmo baseado no artigo disponível em:
+
+```https://automaticaddison.com/the-ultimate-guide-to-real-time-lane-detection-using-opencv/```
+
 # Passos para rodar
 
 1. Ter python 3.9 e pip instalados 
